@@ -5,19 +5,20 @@ import { connect } from 'react-redux';
 class Header extends React.Component {
   totalExpenses = () => {
     const { expenses } = this.props;
-    const total = expenses.reduce((acc, curr) => {
-      acc += curr.exchangeRates[curr.currency].ask * curr.expensesValue;
-      return acc;
-    }, 0);
-    return total.toFixed(2);
+    const total = expenses
+      .map((item) => +item.exchangeRates[item.currency].ask * +item.value);
+    const exp = total.reduce((acc, curr) => acc + curr, 0);
+    return exp.toFixed(2);
   };
 
   render() {
     const { email } = this.props;
     return (
       <div>
-        <p data-testid="email-field">
-          { email }
+        <p>
+          <span data-testid="email-field">
+            { email }
+          </span>
         </p>
         <p>
           Despesa total:

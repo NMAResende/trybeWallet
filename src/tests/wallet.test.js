@@ -27,7 +27,7 @@ describe('Analisando a página de Login', () => {
   test('Verificar se existe um texto com o valor 0', () => {
     renderWithRouterAndRedux(<Wallet />);
     const text = screen.getByTestId('total-field');
-    expect(text).toHaveTextContent('Despesa total: 0');
+    expect(text).toHaveTextContent('0.00');
   });
 
   test('Verificar se existe um texto com o valor BRL', () => {
