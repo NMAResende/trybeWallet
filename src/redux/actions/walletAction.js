@@ -13,6 +13,8 @@ export function fetchCurrency() {
   return async (dispatch) => {
     const url = await fetch('https://economia.awesomeapi.com.br/json/all');
     const response = await url.json();
+    // referência: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+    // ajuda do João
     const data = Object.keys(response);
     const remove = data.filter((coin) => coin !== 'USDT');
     dispatch(expensesUser(remove));

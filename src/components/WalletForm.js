@@ -64,7 +64,7 @@ class WalletForm extends React.Component {
           </select>
         </label>
         <label htmlFor="pay">
-          Método de pagamento
+          Método de pagamento:
           <select
             id="pay"
             name="pay"
@@ -73,13 +73,13 @@ class WalletForm extends React.Component {
             data-testid="method-input"
             onChange={ this.onInputChange }
           >
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao de credito">Cartão de crédito</option>
-            <option value="cartao de debito">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag">
-          Tag
+          Tag:
           <select
             id="tag"
             name="tag"
@@ -88,11 +88,11 @@ class WalletForm extends React.Component {
             data-testid="tag-input"
             onChange={ this.onInputChange }
           >
-            <option value="alimentacao">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
         <button

@@ -41,7 +41,6 @@ class Login extends React.Component {
     return (
       <div data-testid="page-login">
         <div>
-          Login
           <label htmlFor="email">
             Email:
             <input
@@ -54,11 +53,12 @@ class Login extends React.Component {
             />
           </label>
           <label htmlFor="password">
-            Senha (mínimo 6 caracteres):
+            Senha:
             <input
               type="password"
               name="password"
               id="password"
+              placeholder="mínimo 6 caracteres"
               value={ password }
               minLength="6"
               data-testid="password-input"
