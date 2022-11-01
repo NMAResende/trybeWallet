@@ -13,9 +13,15 @@ describe('Analisando a página de Login', () => {
   });
 
   test('Verificar se existe um input de email', () => {
-    renderWithRouterAndRedux(<Wallet />);
+    const INITIAL_STATE = {
+      user: {
+        email: 'teste@teste.com',
+      },
+    };
+
+    renderWithRouterAndRedux(<Wallet />, { INITIAL_STATE });
     const inputEmail = screen.getByTestId('email-input');
-    expect(inputEmail).toHaveTextContent('teste@teste.com');
+    expect(inputEmail).toHaveTextContent(email);
   });
 
   test('Verificar se existe um texto com o valor 0', () => {
@@ -33,7 +39,7 @@ describe('Analisando a página de Login', () => {
   test('Verificar se existe um input de Valor', () => {
     renderWithRouterAndRedux(<Wallet />);
     const inputValor = screen.getByTestId('value-input');
-    expect(inputValor).toHaveValue('');
+    expect(inputValor).toHaveValue('0');
   });
 
   test('Verificar se existe um input de Descrição', () => {
@@ -43,7 +49,18 @@ describe('Analisando a página de Login', () => {
   });
 
   test('Verificar se existe um select de moedas', () => {
-    renderWithRouterAndRedux(<Wallet />);
+    const INITIAL_STATE = {
+      user: {
+        email: 'teste@teste.com',
+      },
+      wallet: {
+        currencies: [
+          'USD',
+        ],
+      },
+    };
+
+    renderWithRouterAndRedux(<Wallet />, { INITIAL_STATE });
     const inputMoeda = screen.getByTestId('currency-input');
     expect(inputMoeda).toHaveValue('USD');
   });

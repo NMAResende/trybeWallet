@@ -1,13 +1,15 @@
 export const EXPENSES_USER = 'EXPENSES_USER';
-export const REQUEST_CURRENCY = 'REQUEST_CURRENCY';
+export const CURRENCIES_USER = 'CURRENCIES_USER';
 
-export const expensesUser = (currencies, expenses) => ({
+export const expensesUser = (expenses) => ({
   type: EXPENSES_USER,
-  currencies,
   expenses,
 });
 
-export const requestCurrency = () => ({ type: REQUEST_CURRENCY });
+export const currenciesUser = (currencies) => ({
+  type: CURRENCIES_USER,
+  currencies,
+});
 
 export function fetchCurrency() {
   return async (dispatch) => {
@@ -17,6 +19,6 @@ export function fetchCurrency() {
     // ajuda do João
     const data = Object.keys(response);
     const remove = data.filter((coin) => coin !== 'USDT');
-    dispatch(expensesUser(remove));
+    dispatch(currenciesUser(remove));
   };
 }
