@@ -1,8 +1,6 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import {
-  CURRENCIES_USER, EXPENSES_DELETE,
-  EXPENSES_EDIT, EXPENSES_USER
-} from '../actions/walletAction';
+// eslint-disable-next-line max-len
+import { CURRENCIES_USER, EXPENSES_DELETE, EXPENSES_EDIT, EXPENSES_USER } from '../actions/walletAction';
 
 const INITIAL_STATE = {
   currencies: [],
