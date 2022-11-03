@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import { expensesDelete, expensesEdit } from '../redux/actions/walletAction';
 
 class Table extends Component {
-  DeleteButton = async () => {
-    const { expenses, dispatch } = this.props;
-    const del = expenses.filter((item) => item.id !== expenses.id);
-    dispatch(expensesDelete(del));
+  DeleteButton = (id) => {
+    const { dispatch } = this.props;
+    dispatch(expensesDelete(id));
   };
 
-  toEditButton = () => {
-    const { expenses, dispatch } = this.props;
-    dispatch(expensesEdit(expenses.id));
+  toEditButton = (expenses) => {
+    const { dispatch } = this.props;
+    dispatch(expensesEdit(expenses));
   };
 
   render() {
@@ -53,16 +52,15 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
-                    onClick={ this.toEditButton }
+                    onClick={ () => this.toEditButton(coin) }
                   >
                     Editar
                   </button>
-                </td>
-                <td>
                   <button
                     type="button"
                     data-testid="delete-btn"
-                    onClick={ this.DeleteButton }
+                    onClick={ () => this.DeleteButton(coin.id) }
+                    id={ coin.id }
                   >
                     Excluir
                   </button>

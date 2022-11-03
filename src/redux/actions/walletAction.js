@@ -13,9 +13,9 @@ export const currenciesUser = (currencies) => ({
   currencies,
 });
 
-export const expensesDelete = (expenses) => ({
+export const expensesDelete = (id) => ({
   type: EXPENSES_DELETE,
-  expenses,
+  id,
 });
 
 export const expensesEdit = (expenses) => ({

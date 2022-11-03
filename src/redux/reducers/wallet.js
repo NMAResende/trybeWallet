@@ -2,7 +2,8 @@
 import {
   CURRENCIES_USER,
   EXPENSES_DELETE,
-  EXPENSES_EDIT, EXPENSES_USER
+  EXPENSES_EDIT,
+  EXPENSES_USER
 } from '../actions/walletAction';
 
 const INITIAL_STATE = {
@@ -27,13 +28,13 @@ const wallet = (state = INITIAL_STATE, action) => {
   case EXPENSES_DELETE:
     return {
       ...state,
-      expenses: action.expenses,
+      expenses: state.expenses.filter((e) => e.id !== +action.id),
     };
   case EXPENSES_EDIT:
     return {
       ...state,
       editor: true,
-      expenses: action.expenses,
+      expenses: action.id,
     };
   default:
     return state;
