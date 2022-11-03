@@ -1,10 +1,11 @@
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import Wallet from '../pages/Wallet';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 
-describe('Analisando a página de Login', () => {
+describe('Analisando a página Wallet', () => {
   test('Verificar se o texto TRYBE WALLET esta impresso na tela', () => {
     renderWithRouterAndRedux(<App />);
     const text = screen.getByText(/TRYBE WALLET/i);
@@ -13,15 +14,27 @@ describe('Analisando a página de Login', () => {
   });
 
   test('Verificar se existe um input de email', () => {
-    const INITIAL_STATE = {
-      user: {
-        email: 'teste@teste.com',
-      },
-    };
+    const emailLog = 'teste@teste.com';
 
-    renderWithRouterAndRedux(<Wallet />, { INITIAL_STATE });
+    const { history } = renderWithRouterAndRedux(<App />);
+
+    const button = screen.getByRole('button', { name: /Entrar/i });
+    expect(button).toBeDisabled();
+
     const inputEmail = screen.getByTestId('email-input');
-    expect(inputEmail).toHaveTextContent(email);
+    userEvent.type(inputEmail, emailLog);
+    const inputSenha = screen.getByTestId('password-input');
+    userEvent.type(inputSenha, '123456');
+
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/carteira');
+
+    const email = screen.getByTestId('email-field');
+    expect(email).toBeVisible();
+    expect(email).toHaveTextContent(emailLog);
   });
 
   test('Verificar se existe um texto com o valor 0', () => {
@@ -39,23 +52,42 @@ describe('Analisando a página de Login', () => {
   test('Verificar se existe um input de Valor', () => {
     renderWithRouterAndRedux(<Wallet />);
     const inputValor = screen.getByTestId('value-input');
-    expect(inputValor).toHaveValue('0');
+    userEvent.type(inputValor, '50,00');
+
+    const button = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(button);
+    userEvent.clear(inputValor);
   });
 
   test('Verificar se existe um input de Descrição', () => {
     renderWithRouterAndRedux(<Wallet />);
     const inputDescricao = screen.getByTestId('description-input');
-    expect(inputDescricao).toHaveValue('');
+    userEvent.type(inputDescricao, 'Hamburguer');
+
+    const button = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(button);
+    userEvent.clear(inputDescricao);
   });
 
   test('Verificar se existe um select de moedas', () => {
     const INITIAL_STATE = {
-      user: {
-        email: 'teste@teste.com',
-      },
       wallet: {
         currencies: [
           'USD',
+          'CAD',
+          'GBP',
+          'ARS',
+          'BTC',
+          'LTC',
+          'EUR',
+          'JPY',
+          'CHF',
+          'AUD',
+          'CNY',
+          'ILS',
+          'ETH',
+          'XRP',
+          'DOGE',
         ],
       },
     };
@@ -83,5 +115,23 @@ describe('Analisando a página de Login', () => {
     const button = screen.getByRole('button', { name: /Adicionar despesa/i });
 
     expect(button).toBeInTheDocument();
+  });
+
+  test('Verificar se existe uma tabela impresa na tela', () => {
+    renderWithRouterAndRedux(<Wallet />);
+    const description = screen.getByTestId('value-input');
+    const value = screen.getByTestId('description-input');
+    const method = screen.getByRole('option', { name: /dinheiro/i });
+    const tag = screen.getByRole('option', { name: /alimentação/i });
+    const table = screen.getByRole('table');
+
+    userEvent.type(description, 'Hamburguer');
+    userEvent.type(value, '50,00');
+    userEvent.type(method, 'Dinheiro');
+    userEvent.type(tag, 'Alimentação');
+
+    const button = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(button);
+    expect(table).toBeVisible();
   });
 });

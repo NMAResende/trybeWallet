@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import App from '../../App';
-import { renderWithRouterAndRedux } from './renderWith';
+import App from '../App';
+import { renderWithRouterAndRedux } from './helpers/renderWith';
 
 describe('Analisando a página de Login', () => {
   test('Verificar se o texto TRYBE WALLET esta impresso na tela', () => {
@@ -26,7 +26,7 @@ describe('Analisando a página de Login', () => {
     expect(inputSenha).toBeInTheDocument();
   });
 
-  test('Verificar se existe um botão clicavel na tela', () => {
+  test('Verificar se existe um botão clicavel na tela e se redireciona para a página /carteira', () => {
     const { history } = renderWithRouterAndRedux(<App />);
 
     const button = screen.getByRole('button', { name: /Entrar/i });
