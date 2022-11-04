@@ -29,6 +29,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       editor: true,
+      idToEdit: action.idToEdit,
       expenses: action.id,
     };
   default:

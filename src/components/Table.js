@@ -52,9 +52,9 @@ class Table extends Component {
                   <button
                     type="button"
                     data-testid="edit-btn"
-                    onClick={ () => this.toEditButton(coin) }
+                    onClick={ () => this.toEditButton(coin.id) }
                   >
-                    Editar
+                    Editar despesa
                   </button>
                   <button
                     type="button"

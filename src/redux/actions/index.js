@@ -47,6 +47,5 @@ export function fetchexpenses(state) {
     const response = await url.json();
     const data = { ...state, exchangeRates: response };
     dispatch(expensesUser(data));
-    console.log(response);
   };
 }

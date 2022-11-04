@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrency, fetchexpenses } from '../redux/actions';
+import { expensesEdit, fetchCurrency, fetchexpenses } from '../redux/actions';
 
 class WalletForm extends React.Component {
   constructor() {
@@ -43,14 +43,21 @@ class WalletForm extends React.Component {
     }));
   };
 
-  // saveInfoButton = () => {
-  //   const { dispatch } = this.props;
-  //   dispatch(expensesUser(this.state));
-
-  // };
+  handleEdit = () => {
+    const { dispatch, expenses, idToEdit } = this.props;
+    this.setState({
+      id: idToEdit,
+      value: expenses.value,
+      description: expenses.description,
+      currency: expenses.currency,
+      method: expenses.method,
+      tag: expenses.tag,
+    });
+    dispatch(expensesEdit(expenses));
+  };
 
   render() {
-    const { currencies } = this.props;
+    const { currencies, editor } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
       <form>
@@ -133,12 +140,22 @@ class WalletForm extends React.Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-        <button
-          type="button"
-          onClick={ this.handleButton }
-        >
-          Adicionar despesa
-        </button>
+        { editor ? (
+          <button
+            type="button"
+            onClick={ this.handleEdit }
+          >
+            Editar Despesa
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={ this.handleButton }
+          >
+            Adicionar despesa
+          </button>
+        )}
+
       </form>
     );
   }
@@ -148,11 +165,16 @@ WalletForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   // Referência: https://reactjs.org/docs/typechecking-with-proptypes.html
   currencies: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  editor: PropTypes.bool.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  idToEdit: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
 });
 
 export default connect(mapStateToProps)(WalletForm);

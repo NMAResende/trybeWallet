@@ -166,4 +166,18 @@ describe('Analisando a página Wallet', () => {
       userEvent.click(buttonDelete);
     });
   });
+
+  test('Verificar se existe um botão de editar na tela', async () => {
+    renderWithRouterAndRedux(<Wallet />);
+
+    const table = screen.getByRole('table');
+
+    const buttonAdd = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(buttonAdd);
+    expect(table).toBeVisible();
+
+    const buttonEdit = await screen.findByRole('button', { name: /Editar despesa/i });
+    userEvent.click(buttonEdit);
+    expect(buttonAdd).toHaveTextContent(/Editar despesa/i);
+  });
 });
