@@ -1,9 +1,13 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import Wallet from '../pages/Wallet';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
+
+const valueInput = 'value-input';
+const descriptionInput = 'description-input';
+const Alimentacao = 'Alimentação';
 
 describe('Analisando a página Wallet', () => {
   test('Verificar se o texto TRYBE WALLET esta impresso na tela', () => {
@@ -51,7 +55,7 @@ describe('Analisando a página Wallet', () => {
 
   test('Verificar se existe um input de Valor', () => {
     renderWithRouterAndRedux(<Wallet />);
-    const inputValor = screen.getByTestId('value-input');
+    const inputValor = screen.getByTestId(valueInput);
     userEvent.type(inputValor, '50,00');
 
     const button = screen.getByRole('button', { name: /Adicionar despesa/i });
@@ -61,7 +65,7 @@ describe('Analisando a página Wallet', () => {
 
   test('Verificar se existe um input de Descrição', () => {
     renderWithRouterAndRedux(<Wallet />);
-    const inputDescricao = screen.getByTestId('description-input');
+    const inputDescricao = screen.getByTestId(descriptionInput);
     userEvent.type(inputDescricao, 'Hamburguer');
 
     const button = screen.getByRole('button', { name: /Adicionar despesa/i });
@@ -69,7 +73,7 @@ describe('Analisando a página Wallet', () => {
     userEvent.clear(inputDescricao);
   });
 
-  test('Verificar se existe um select de moedas', () => {
+  test('Verificar se existe um select de moedas', async () => {
     const INITIAL_STATE = {
       wallet: {
         currencies: [
@@ -94,7 +98,10 @@ describe('Analisando a página Wallet', () => {
 
     renderWithRouterAndRedux(<Wallet />, { INITIAL_STATE });
     const inputMoeda = screen.getByTestId('currency-input');
-    expect(inputMoeda).toHaveValue('USD');
+    // ajuda do Tiago
+    await waitFor(() => {
+      expect(inputMoeda).toHaveValue('USD');
+    });
   });
 
   test('Verificar se existe um select de método de pagamento', () => {
@@ -106,7 +113,7 @@ describe('Analisando a página Wallet', () => {
   test('Verificar se existe um select de tag', () => {
     renderWithRouterAndRedux(<Wallet />);
     const inputTag = screen.getByTestId('tag-input');
-    expect(inputTag).toHaveValue('Alimentação');
+    expect(inputTag).toHaveValue(Alimentacao);
   });
 
   test('Verificar se existe um botão clicavel na tela', () => {
@@ -119,8 +126,8 @@ describe('Analisando a página Wallet', () => {
 
   test('Verificar se existe uma tabela impresa na tela', () => {
     renderWithRouterAndRedux(<Wallet />);
-    const description = screen.getByTestId('value-input');
-    const value = screen.getByTestId('description-input');
+    const description = screen.getByTestId(valueInput);
+    const value = screen.getByTestId(descriptionInput);
     const method = screen.getByRole('option', { name: /dinheiro/i });
     const tag = screen.getByRole('option', { name: /alimentação/i });
     const table = screen.getByRole('table');
@@ -128,10 +135,35 @@ describe('Analisando a página Wallet', () => {
     userEvent.type(description, 'Hamburguer');
     userEvent.type(value, '50,00');
     userEvent.type(method, 'Dinheiro');
-    userEvent.type(tag, 'Alimentação');
+    userEvent.type(tag, Alimentacao);
 
     const button = screen.getByRole('button', { name: /Adicionar despesa/i });
     userEvent.click(button);
     expect(table).toBeVisible();
+  });
+
+  test('Verificar se existe um botão de excluir nas despesas', async () => {
+    renderWithRouterAndRedux(<Wallet />);
+
+    const description = screen.getByTestId(valueInput);
+    const value = screen.getByTestId(descriptionInput);
+    const method = screen.getByRole('option', { name: /dinheiro/i });
+    const tag = screen.getByRole('option', { name: /alimentação/i });
+    const table = screen.getByRole('table');
+
+    userEvent.type(description, 'Hamburguer');
+    userEvent.type(value, '50,00');
+    userEvent.type(method, 'Dinheiro');
+    userEvent.type(tag, Alimentacao);
+
+    const buttonAdd = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(buttonAdd);
+    expect(table).toBeVisible();
+
+    // ajuda do Tiago
+    await waitFor(() => {
+      const buttonDelete = screen.getByRole('button', { name: /excluir/i });
+      userEvent.click(buttonDelete);
+    });
   });
 });

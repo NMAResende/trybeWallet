@@ -1,15 +1,21 @@
-export const EXPENSES_USER = 'EXPENSES_USER';
-export const CURRENCIES_USER = 'CURRENCIES_USER';
+export const EXPENSES = 'EXPENSES';
+export const CURRENCIES = 'CURRENCIES';
 export const EXPENSES_DELETE = 'EXPENSES_DELETE';
 export const EXPENSES_EDIT = 'EXPENSES_EDIT';
+export const USER_EMAIL = 'USER_EMAIL';
+
+export const userEmail = (email) => ({
+  type: USER_EMAIL,
+  email,
+});
 
 export const expensesUser = (expenses) => ({
-  type: EXPENSES_USER,
+  type: EXPENSES,
   expenses,
 });
 
 export const currenciesUser = (currencies) => ({
-  type: CURRENCIES_USER,
+  type: CURRENCIES,
   currencies,
 });
 

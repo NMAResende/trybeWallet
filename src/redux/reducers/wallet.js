@@ -1,6 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-// eslint-disable-next-line max-len
-import { CURRENCIES_USER, EXPENSES_DELETE, EXPENSES_EDIT, EXPENSES_USER } from '../actions/walletAction';
+import { CURRENCIES, EXPENSES, EXPENSES_DELETE, EXPENSES_EDIT } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -11,12 +10,12 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case EXPENSES_USER:
+  case EXPENSES:
     return {
       ...state,
       expenses: [...state.expenses, action.expenses],
     };
-  case CURRENCIES_USER:
+  case CURRENCIES:
     return {
       ...state,
       currencies: action.currencies,
