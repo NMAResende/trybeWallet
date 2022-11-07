@@ -132,7 +132,7 @@ code {
   -webkit-transition: all 150ms ease-in-out;
   font-size: 14px;
   height: 30px;
-  margin: -5px 0 0 50px;
+  margin: -5px 0 0 -40px;
   position: absolute;
   text-shadow: 0.1em 0.1em 0.2em white;
   transition: all 150ms ease-in-out;
@@ -151,7 +151,7 @@ code {
   -webkit-transition: all 150ms ease-in-out;
   font-size: 14px;
   height: 30px;
-  margin: -5px 0 0 -70px;
+  margin: -40px 0 0 -60px;
   position: absolute;
   text-shadow: 0.1em 0.1em 0.2em white;
   transition: all 150ms ease-in-out;
@@ -285,4 +285,17 @@ code {
   height: 22px;
   margin-left: 10px;
   width: 120px;
+}
+
+table {
+  background-color:#DCDCDC;
+  border-radius: 5px;
+  box-shadow: 0.1em 0.1em 0.2em #666666;
+  height: 300px;
+  padding: 10px;
+  width: 100%;
+}
+
+ th, td {
+  text-align: center;
 }
