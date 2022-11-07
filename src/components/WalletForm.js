@@ -63,9 +63,10 @@ class WalletForm extends React.Component {
   };
 
   handleEdit = () => {
-    const { dispatch } = this.props;
+    const { dispatch, idToEdit } = this.props;
     const { value, description, currency, method, tag } = this.state;
     const newObj = {
+      id: idToEdit,
       value,
       description,
       currency,

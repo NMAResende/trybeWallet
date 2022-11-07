@@ -37,7 +37,7 @@ const wallet = (state = INITIAL_STATE, action) => {
       editor: false,
       expenses: [
         ...state.expenses.map((el) => (el.id === action.expense.id
-          ? action.expense : el)),
+          ? { ...el, ...action.expense } : el)),
       ],
     };
   // todo criar um envio da expenses editada
