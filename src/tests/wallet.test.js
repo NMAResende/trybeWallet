@@ -189,4 +189,29 @@ describe('Analisando a página Wallet', () => {
     userEvent.click(buttonEdit);
     expect(buttonAdd).toHaveTextContent(/Editar despesa/i);
   });
+
+  test('Verificar se aparece um botão de editar na tela para conclução da edição', async () => {
+    renderWithRouterAndRedux(<Wallet />);
+
+    const description = screen.getByTestId(valueInput);
+    const value = screen.getByTestId(descriptionInput);
+    const method = screen.getByRole('option', { name: /dinheiro/i });
+    const tag = screen.getByRole('option', { name: /alimentação/i });
+    const table = screen.getByRole('table');
+
+    userEvent.type(description, 'Hamburguer');
+    userEvent.type(value, '50,00');
+    userEvent.type(method, 'Dinheiro');
+    userEvent.type(tag, Alimentacao);
+
+    const buttonAdd = screen.getByRole('button', { name: /Adicionar despesa/i });
+    userEvent.click(buttonAdd);
+    expect(table).toBeVisible();
+
+    const buttonEdit = await screen.findByTestId('edit-btn');
+    userEvent.click(buttonEdit);
+
+    const buttonSave = await screen.findByTestId('edit-btn-1');
+    userEvent.click(buttonSave);
+  });
 });

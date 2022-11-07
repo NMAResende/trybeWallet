@@ -174,6 +174,7 @@ class WalletForm extends React.Component {
           <button
             type="button"
             className="buttonEdit1"
+            data-testid="edit-btn-1"
             onClick={ this.handleEdit }
           >
             Editar Despesa
