@@ -170,7 +170,16 @@ describe('Analisando a página Wallet', () => {
   test('Verificar se existe um botão de editar na tela', async () => {
     renderWithRouterAndRedux(<Wallet />);
 
+    const description = screen.getByTestId(valueInput);
+    const value = screen.getByTestId(descriptionInput);
+    const method = screen.getByRole('option', { name: /dinheiro/i });
+    const tag = screen.getByRole('option', { name: /alimentação/i });
     const table = screen.getByRole('table');
+
+    userEvent.type(description, 'Hamburguer');
+    userEvent.type(value, '50,00');
+    userEvent.type(method, 'Dinheiro');
+    userEvent.type(tag, Alimentacao);
 
     const buttonAdd = screen.getByRole('button', { name: /Adicionar despesa/i });
     userEvent.click(buttonAdd);

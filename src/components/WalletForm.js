@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { expensesEdit, fetchCurrency, fetchexpenses } from '../redux/actions';
+import { fetchCurrency, fetchexpenses, save } from '../redux/actions';
+
+const alimentacao = 'Alimentação';
 
 class WalletForm extends React.Component {
   constructor() {
@@ -12,7 +14,7 @@ class WalletForm extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: alimentacao,
       exchangeRates: {},
     };
   }
@@ -20,6 +22,23 @@ class WalletForm extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchCurrency());
+  }
+
+  componentDidUpdate(prevProps) {
+    const { editor, expenses, idToEdit } = this.props;
+    if (editor && !prevProps.editor) {
+      const findEdit = expenses.find((el) => el.id === idToEdit);
+      // eu preciso pegar minha despesa do redux
+      // o setState precisa se alimentar desta despesa
+      this.setState({
+        id: idToEdit,
+        value: findEdit.value,
+        description: findEdit.description,
+        currency: findEdit.currency,
+        method: findEdit.method,
+        tag: findEdit.tag,
+      });
+    }
   }
 
   onInputChange = (e) => {
@@ -39,29 +58,38 @@ class WalletForm extends React.Component {
       description: '',
       currency: 'USD',
       method: 'Dinheiro',
-      tag: 'Alimentação',
+      tag: alimentacao,
     }));
   };
 
   handleEdit = () => {
-    const { dispatch, expenses, idToEdit } = this.props;
+    const { dispatch } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    const newObj = {
+      value,
+      description,
+      currency,
+      method,
+      tag,
+    };
+    // preciso montar um novo objeto com os meus estados
+    // aqui o map me da menos problemas que o filter
+    dispatch(save(newObj));
     this.setState({
-      id: idToEdit,
-      value: expenses.value,
-      description: expenses.description,
-      currency: expenses.currency,
-      method: expenses.method,
-      tag: expenses.tag,
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: alimentacao,
     });
-    dispatch(expensesEdit(expenses));
   };
 
   render() {
     const { currencies, editor } = this.props;
     const { value, description, currency, method, tag } = this.state;
     return (
-      <form>
-        <label htmlFor="expensesValue">
+      <form className="containerWallet">
+        <label htmlFor="expensesValue" className="value">
           Valor:
           <input
             type="text"
@@ -73,11 +101,11 @@ class WalletForm extends React.Component {
             onChange={ this.onInputChange }
           />
         </label>
-        <label htmlFor="description">
+        <label htmlFor="description" className="description">
           Descrição:
           <input
             type="text"
-            className="description"
+            className="descriptionInput"
             id="description"
             name="description"
             value={ description }
@@ -85,12 +113,13 @@ class WalletForm extends React.Component {
             onChange={ this.onInputChange }
           />
         </label>
-        <label htmlFor="currency">
+        <br />
+        <label htmlFor="currency" className="currency">
           Moeda:
           <select
             id="currency"
             name="currency"
-            className="currency"
+            className="currencyInput"
             type="select"
             value={ currency }
             data-testid="currency-input"
@@ -106,12 +135,12 @@ class WalletForm extends React.Component {
             ))}
           </select>
         </label>
-        <label htmlFor="method">
+        <label htmlFor="method" className="method">
           Método de pagamento:
           <select
             id="method"
             name="method"
-            className="method"
+            className="methodInput"
             value={ method }
             type="select"
             data-testid="method-input"
@@ -122,12 +151,12 @@ class WalletForm extends React.Component {
             <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor="tag">
+        <label htmlFor="tag" className="tag">
           Tag:
           <select
             id="tag"
             name="tag"
-            className="tag"
+            className="tagInput"
             value={ tag }
             type="select"
             data-testid="tag-input"
@@ -140,9 +169,11 @@ class WalletForm extends React.Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
+        <br />
         { editor ? (
           <button
             type="button"
+            className="buttonEdit1"
             onClick={ this.handleEdit }
           >
             Editar Despesa
@@ -150,6 +181,7 @@ class WalletForm extends React.Component {
         ) : (
           <button
             type="button"
+            className="buttonDespesa"
             onClick={ this.handleButton }
           >
             Adicionar despesa

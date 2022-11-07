@@ -3,6 +3,7 @@ export const CURRENCIES = 'CURRENCIES';
 export const EXPENSES_DELETE = 'EXPENSES_DELETE';
 export const EXPENSES_EDIT = 'EXPENSES_EDIT';
 export const USER_EMAIL = 'USER_EMAIL';
+export const SAVE = 'SAVE';
 
 export const userEmail = (email) => ({
   type: USER_EMAIL,
@@ -24,9 +25,14 @@ export const expensesDelete = (id) => ({
   id,
 });
 
-export const expensesEdit = (expenses) => ({
+export const expensesEdit = (idToEdit) => ({
   type: EXPENSES_EDIT,
-  expenses,
+  idToEdit,
+});
+
+export const save = (expense) => ({
+  type: SAVE,
+  expense,
 });
 
 export function fetchCurrency() {

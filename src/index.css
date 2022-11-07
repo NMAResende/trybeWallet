@@ -1,13 +1,288 @@
 body {
-  margin: 0;
+  background-image: url('https://www.suno.com.br/wp-content/uploads/2018/08/despesas-capital.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.emailInput {
+  border-radius: 5px;
+  height: 25px;
+  margin: 180px 0 0 -190px;
+  position: absolute;
+  width: 250px;
+}
+
+.emailInput::placeholder {
+  color: black;
+  font-family: 'Oxygen';
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.title {
+  display: flex;
+  font-family: 'Roboto';
+  font-size: 50px;
+  font-weight: bolder;
+  justify-content: center;
+  margin-bottom: 100px;
+  margin-top: 70px;
+  text-shadow: 0.1em 0.1em 0.2em white;
+}
+
+.conteiner {
+  background-image: url('https://png.pngtree.com/png-vector/20190917/ourlarge/pngtree-brown-wallet-icon-cartoon-style-png-image_1733529.jpg');
+  background-position: center;
+  background-size: 750px;
+  background-repeat: no-repeat;
+  height: 380px;
+  border-radius: 5px;
+  box-shadow: 0.1em 0.1em 0.2em black;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  width: 600px;
+}
+
+.passwordInput {
+  border-radius: 5px;
+  height: 25px;
+  margin: 210px 0 0 -190px;
+  position: absolute;
+  width: 250px;
+}
+
+.passwordInput::placeholder {
+  color: black;
+  font-family: 'Oxygen';
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.buttonEntrar {
+  border-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  font-size: 15px;
+  height: 35px;
+  margin: 260px 0 0 20px;
+  position: absolute;
+  text-shadow: 0.1em 0.1em 0.2em white;
+  transition: all 150ms ease-in-out;
+  width: 60px;
+}
+
+.buttonEntrar:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+.buttonDespesa {
+  border-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  font-size: 18px;
+  height: 40px;
+  margin: 30px 0 0 390px;
+  position: absolute;
+  text-shadow: 0.1em 0.1em 0.2em white;
+  transition: all 150ms ease-in-out;
+  width: 190px;
+}
+
+.buttonDespesa:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+.buttonEdit1 {
+  border-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  font-size: 18px;
+  height: 40px;
+  margin: 30px 0 0 390px;
+  position: absolute;
+  text-shadow: 0.1em 0.1em 0.2em white;
+  transition: all 150ms ease-in-out;
+  width: 190px;
+}
+
+.buttonEdit1:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+.buttonDelete {
+  border-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  font-size: 14px;
+  height: 30px;
+  margin: -5px 0 0 50px;
+  position: absolute;
+  text-shadow: 0.1em 0.1em 0.2em white;
+  transition: all 150ms ease-in-out;
+  width: 80px;
+}
+
+.buttonDelete:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+.buttonEdit {
+  border-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  font-size: 14px;
+  height: 30px;
+  margin: -5px 0 0 -70px;
+  position: absolute;
+  text-shadow: 0.1em 0.1em 0.2em white;
+  transition: all 150ms ease-in-out;
+  width: 110px;
+}
+
+.buttonEdit:hover {
+  box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #3498db;
+}
+
+.titleHeader {
+  color: black;
+  display: inline-block;
+  font-size: 40px;
+  margin-left: 70px;
+  margin-right: 50px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.emailField {
+  color: black;
+  display: inline-block;
+  font-size: 18px;
+  margin-bottom: 100px;
+  margin-left: 400px;
+  margin-right: 50px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.totalField {
+  color: black;
+  display: inline-block;
+  font-size: 20px;
+  margin-right: 50px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.despesa {
+  color: black;  
+  font-weight: bolder;
+  margin-left: 10px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.brlField {
+  color: black;
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 50px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.containerWallet {
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0.1em 0.1em 0.2em #666666;
+  height: 200px;
+  margin-bottom: 50px;
+  margin-left: 250px;
+  padding: 20px;
+  width: 1000px;
+}
+
+.value {
+  font-size: 20px;
+  margin-left: 180px;
+  margin-right: 30px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.expensesValue {
+  border-radius: 5px;
+  height: 22px;
+  margin-left: 10px;
+  margin-top: 50px;
+  width: 100px;
+}
+
+.description {
+  font-size: 20px;
+  margin-left: 8px;
+  margin-right: 30px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.descriptionInput {
+  border-radius: 5px;
+  height: 22px;
+  margin-bottom: 40px;
+  margin-left: 10px;
+  width: 280px;
+}
+
+.currency {
+  font-size: 20px;
+  margin-left: 50px;
+  margin-right: 30px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.currencyInput {
+  border-radius: 5px;
+  height: 22px;
+  margin-left: 10px;
+  width: 60px;
+}
+
+.method {
+  font-size: 20px;
+  margin-left: 8px;
+  margin-right: 30px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.methodInput {
+  border-radius: 5px;
+  height: 22px;
+  margin-left: 10px;
+  width: 135px;
+}
+
+.tag {
+  font-size: 20px;
+  margin-left: 8px;
+  margin-right: 30px;
+  text-shadow: 0.1em 0.1em 0.2em #666666;
+}
+
+.tagInput {
+  border-radius: 5px;
+  height: 22px;
+  margin-left: 10px;
+  width: 120px;
 }
